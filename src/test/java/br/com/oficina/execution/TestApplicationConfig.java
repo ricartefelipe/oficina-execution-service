@@ -1,4 +1,4 @@
-package br.com.oficina.execution.bdd;
+package br.com.oficina.execution;
 
 import br.com.oficina.execution.application.port.out.ExecutionEventPublisherPort;
 import br.com.oficina.execution.application.port.out.FilaExecucaoPersistencePort;
@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @TestConfiguration
-public class TestConfig {
+public class TestApplicationConfig {
 
     @Bean
     @Primary
