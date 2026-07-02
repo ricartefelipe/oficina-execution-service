@@ -67,7 +67,7 @@ public class ExecutionService {
         var fila = buscarOuFalhar(osId);
         fila.registrarFalha(motivo);
         var salva = persistence.salvar(fila);
-        log.error("OS {} com falha na execucao: {}", osId, motivo);
+        log.error("OS {} com falha na execucao: {}", osId, motivo != null ? motivo.replaceAll("[^a-zA-Z0-9 ._-]", "_") : "null");
         events.publish("execucao.falhou", buildEvent(osId, "motivo", motivo));
         return salva;
     }
