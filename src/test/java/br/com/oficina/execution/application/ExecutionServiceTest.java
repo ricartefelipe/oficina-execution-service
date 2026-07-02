@@ -76,6 +76,18 @@ class ExecutionServiceTest {
     }
 
     @Test
+    void deveRegistrarFalhaComMotivoNulo() {
+        var osId = UUID.randomUUID();
+        var fila = FilaExecucao.criar(osId);
+        when(persistence.buscarPorOsId(osId)).thenReturn(Optional.of(fila));
+        when(persistence.salvar(any())).thenReturn(fila);
+
+        service.registrarFalha(osId, null);
+
+        verify(events).publish(eq("execucao.falhou"), any());
+    }
+
+    @Test
     void deveRemoverDaFilaSemErroSeNaoExistir() {
         var osId = UUID.randomUUID();
         when(persistence.buscarPorOsId(osId)).thenReturn(Optional.empty());
